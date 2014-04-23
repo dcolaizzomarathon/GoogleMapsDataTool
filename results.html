@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <link href="results.css" rel="stylesheet" type="text/css" />
+    <script src="../bower_components/d3/d3.js"></script>
+    
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="performanceTool.js"></script>
+</head>
+
+<body data-ng-app="PerformanceTool">
+    <div data-ng-controller="Main" style="color:red;">
+        <input id="trialFileName" style="width:100%" placeholder="C:\RoutingAlgorithm\performance.json" />
+        <span id="resultContent" class="result-count"></span>
+        <button data-ng-click="loadFile()">Load</button>
+        <button id="deleteFile">Delete</button>
+        <script src="line_graph.js"></script>
+    </div>
+</body>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <link href="results.css" rel="stylesheet" type="text/css" />
+    <link href="bar-graph.css" rel="stylesheet" type="text/css" />
+
+    <script src="../bower_components/d3/d3.js"></script>
+    
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="performanceDataService.js"></script>
+    <script src="lineGraph.js"></script>
+    <script src="barGraph.js"></script>
+</head>
+
+<body data-ng-app="PerformanceTool">
+    <div data-ng-controller="Main" style="color:red;">
+    	<div line-graph="" data-ng-model="results"></div>
+    	<!-- <div bar-graph="" data-ng-model="results"></div> -->
+        <input style="width:100%" placeholder="C:\RoutingAlgorithm\performance.json" />
+        <span class="result-count"></span>
+        <button data-ng-click="loadFile()">Load</button>
+        <button>Delete</button>
+    </div>
+</body>

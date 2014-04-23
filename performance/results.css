@@ -1,0 +1,36 @@
+body {
+    font: 10px sans-serif;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.x.axis path {
+    display: none;
+}
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+    font-size: 4em;
+}
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 3.5px;
+    opacity: .4;
+}
+.result-count {
+    font-size: 20em;
+    top:0px;
+    right:0px;
+    position: absolute;
+}
+.label{
+    font-size: 3em;
+}
+.active {
+    stroke-width: 10px;
+    opacity: 1;
+}

@@ -1,0 +1,98 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+.left-column, .right-column {
+    padding: 10px;
+    margin: 10px;
+}
+.left-column {
+    width:400px;
+}
+.right-column {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+}
+.row {
+    flex: 1 1 auto;
+}
+.angular-google-map-container {
+    height: 50%;
+    position:absolute;
+    bottom:0;
+    top:50%;
+    left:460px;
+    right:20px;
+}
+.ng-table {
+    border: 1px solid #000;
+}
+.test-runner-form > label {
+    display: block;
+    padding: 5px;
+    margin: 5px;
+}
+select, input {
+    height: 2em;
+}
+.test-results {
+    width: 100%;
+    overflow: hidden;
+}
+
+table {
+    border:none;
+    border-collapse: collapse;
+}
+th, td {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(220, 222, 221, .5);
+    margin: 2px;
+    padding: 2px;
+}
+th:hover, tr:hover {
+    background-color: rgba(220, 222, 221, .5);
+}
+.failed {
+    background-color: #FF9999;
+}
+.active {
+    background-color: green;
+}
+.start {
+    float:right;
+    height: 5em;
+    width: 15em;
+    color: white;
+    vertical-align: center;
+    border-radius: 3px;
+    border-color: none;
+    background-color: rgba(10, 194, 97, .5);
+}
+button:disabled {
+    background:#dddddd;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.bar {
+    fill: steelblue;
+}
+.x.axis path {
+    display: none;
+}
+
+.flex-svg {
+    flex: 1;
+}

@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src='bower_components/underscore/underscore.js'></script>
+
+    <script src="bower_components/d3/d3.js"></script>
+    <script src='bower_components/angular/angular.js'></script>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.js'></script>
+    <script src='bower_components/angular-timer/dist/angular-timer.js'></script>
+
+    <link href="app.css" rel="stylesheet" type="text/css" />
+    <script src="app.js"></script>
+    <script src="geolocation.js"></script>
+    <script src="circularPoints.js"></script>
+    <script src="matrixService.js"></script>
+    <script src="barGraph.js"></script>
+</head>
+
+<body data-ng-app="GoogleMapsDataTool">
+    <div data-ng-controller="Main" class="main">
+        <div class="test-runner left-column">
+            <h1>Test Runner
+                <button class="start" data-ng-disabled="!coordinatesAsString" data-ng-click="startTest()">Start</button>
+            </h1>
+            <div class="test-runner-form">
+                <label>
+                    Test Type
+                    <select ng-model="test" ng-options="t.name for t in tests"></select>
+                </label>
+                <label data-ng-show="test && test.type!='manual'">
+                    Radius(miles)
+                    <input data-ng-model="radius" data-ng-show="test && test.type!='manual'" type="number"></input>
+                </label>
+                <label data-ng-show="test.type!='manual'">Number of Points
+                    <input ng-model="numberOfPoints" min="0" type="number" data-ng-show="test.type!='manual'"></input>
+                    <button data-ng-disabled="test.type=='manual'" data-ng-show="test.type!='manual'" data-ng-click="generatePoints()">Generate</button>
+                </label>
+                <label>
+                    Points
+                    <textarea style="width:100%; height:6em;" data-ng-model="coordinatesAsString"></textarea>
+                </label>
+                <label>
+                    <span>Center</span>
+                    <span>{{map.center.latitude}}, {{map.center.longitude}}</span>
+                </label>
+            </div>
+            <div class="test-results">
+                <button ng-click="reset()">Reset</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="t in testResults" data-ng-class="{failed: t.success ===false}">
+                            <td>{{t.type}}</td>
+                            <td>{{t.description}}</td>
+                            <td>
+                                <timer data-ng-if="!t.duration"></timer>
+                                {{t.duration}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="right-column">
+            <div bar-graph="" results="testResults" class="row" style="display:flex; flex-direction: column">
+                Graph Time to Complete
+                </br>Distance(Sorted by number of points) vs Time
+                </br>Points(Sorted by distance) vs Time
+                </br>Subsequent Runs of the same data
+            </div>
+            <div class="row" style="background-color:blue">
+                <google-map draggable="true" center="map.center" zoom="map.zoom">
+                    <marker options="markerOptions" coords="map.center" events="markerEvents">
+                    </marker>
+                    <marker data-ng-repeat="c in coordinates" coords="c"></marker>
+                </google-map>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
