@@ -30,17 +30,6 @@ angular.module('GoogleMapsDataTool').controller('Main', ['$scope', '$filter', 'g
         $scope.reset = function(){
             $scope.testResults = [];
         }
-        // var offset = new Date(0).getTimezoneOffset() * 60 * 1000;
-        // var data = [{
-        //     name: "Circular Radius",
-        //     runTime: new Date(66000 + offset)
-        // }, {
-        //     name: "Circular Radius",
-        //     runTime: new Date()
-        // }, {
-        //     name: "Circular Radius",
-        //     runTime: new Date()
-        // }];
 
         geolocation.getCurrentPosition().then(function(currentLocation) {
             $scope.map.center.latitude = currentLocation.coords.latitude;
@@ -64,7 +53,9 @@ angular.module('GoogleMapsDataTool').controller('Main', ['$scope', '$filter', 'g
             };
             $scope.testResults.push($scope.currentTestResult);
 
-            matrixService.getXDima($scope.coordinates)
+            $scope.onTextAreaChanged();
+            
+            matrixService.getXDima($scope.parsedCoordinates)
                 .then(function(result) {
                     $scope.currentTestResult.matrix = result.matrix.matrix;
                     $scope.currentTestResult.duration = result.duration;
@@ -73,6 +64,23 @@ angular.module('GoogleMapsDataTool').controller('Main', ['$scope', '$filter', 'g
                     $scope.stopTimer();
                     $scope.currentTestResult.success = false;
                 });
+        };
+
+        $scope.onTextAreaChanged = function(){
+            var coordinatesAsString = $scope.coordinatesAsString;
+            $scope.parsedCoordinates = $scope.parseCoordinates(coordinatesAsString);
+        }
+
+        $scope.parseCoordinates = function(coordinatesAsString){
+            var coordinates = coordinatesAsString.split("\n").map(function(coordinatePairString){
+                var coordinates = coordinatePairString.split(" ");
+                return {
+                    latitude: coordinates[0] || 0,
+                    longitude: coordinates[1] || 0
+                };
+            });
+
+            return coordinates;
         };
 
         $scope.$watch('coordinates', function(newCoordinates) {
